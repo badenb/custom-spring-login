@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api")
 public class MainController {
 
-    @GetMapping("/hello")
-    public String hello() {
-        return "IT IS WORKING";
+    @GetMapping("/authenticate")
+    public String authenticate() {
+        return "authenticated";
     }
 }
