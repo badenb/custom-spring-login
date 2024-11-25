@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RestController;
 @Controller
 public class MainController {
 
-    @GetMapping("/login")
-    public String login() {
-        return "redirect:http://localhost:3000/login";
+    @GetMapping("/")
+    public String home() {
+        return "index";
     }
 }
