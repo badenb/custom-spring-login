@@ -2,7 +2,6 @@ package org.example.customspringlogin.global.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -24,17 +23,23 @@ public class SecurityConfig {
                     authorize.requestMatchers("/static/**").permitAll();
                     authorize.anyRequest().authenticated();
                 })
-            .formLogin(form -> form.loginProcessingUrl("/api/login").permitAll())
-            .logout(LogoutConfigurer::permitAll)
-            .csrf(AbstractHttpConfigurer::disable);
+                .formLogin(form -> form.loginProcessingUrl("/api/login").permitAll())
+                .logout(LogoutConfigurer::permitAll)
+                .csrf(AbstractHttpConfigurer::disable);
 
         return http.build();
     }
 
     @Bean
     public InMemoryUserDetailsManager userDetailsManager() {
-        UserDetails admin = User.withUsername("admin").password(passwordEncoder().encode("password")).roles("ADMIN").build();
-        UserDetails user = User.withUsername("user").password(passwordEncoder().encode("password")).roles("USER").build();
+        UserDetails admin = User.withUsername("admin")
+                .password(passwordEncoder().encode("password"))
+                .roles("ADMIN")
+                .build();
+        UserDetails user = User.withUsername("user")
+                .password(passwordEncoder().encode("password"))
+                .roles("USER")
+                .build();
 
         return new InMemoryUserDetailsManager(admin, user);
     }
